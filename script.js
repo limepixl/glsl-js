@@ -1,3 +1,24 @@
+var x = 1.0;
+var y = 1.0;
+var z = 1.0;
+var xSlider = document.getElementById("xSlider");
+xSlider.oninput = function() 
+{
+    x = this.value;
+}
+
+var ySlider = document.getElementById("ySlider");
+ySlider.oninput = function() 
+{
+    y = this.value;
+}
+
+var zSlider = document.getElementById("zSlider");
+zSlider.oninput = function() 
+{
+    z = this.value;
+}
+
 // Create shader program linking a vertex and fragment shader
 function initShaderProgram(gl, vertexSource, fragmentSource) {
     const vertex = gl.createShader(gl.VERTEX_SHADER);
@@ -62,10 +83,10 @@ function main() {
 
     const fragmentSource =
     `precision mediump float;
-    uniform float time;
+    uniform vec3 color;
     void main()
     {
-        gl_FragColor = vec4((sin(time) + 1.0) / 2.0, 0.0, 0.0, 1.0);
+        gl_FragColor = vec4(color, 1.0);
     }`;
 
     const shaderProgram = initShaderProgram(gl, vertexSource, fragmentSource);
@@ -78,7 +99,7 @@ function main() {
         uniformLocations: {
             projection: gl.getUniformLocation(shaderProgram, 'projection'),
             modelView: gl.getUniformLocation(shaderProgram, 'modelView'),
-            time: gl.getUniformLocation(shaderProgram, 'time')
+            color: gl.getUniformLocation(shaderProgram, 'color')
         }
     }
 
@@ -126,7 +147,8 @@ function drawFrame(time) {
     mat4.rotate(modelViewMatrix, modelViewMatrix, time, [0.0, 1.0, 0.0]);
 
     gl.useProgram(info.program);
-    gl.uniform1f(info.uniformLocations.time, elapsed);
+
+    gl.uniform3f(info.uniformLocations.color, x, y, z);
     gl.uniformMatrix4fv(info.uniformLocations.modelView, false, modelViewMatrix);
 
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);

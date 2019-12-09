@@ -4,10 +4,20 @@
 <head>
     <title>GLSL</title>
     <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
     <canvas id="openGLCanvas" width="500" height="500"></canvas>
+    <div class="slidecontainer">
+        <input type="range" min="0" max="1" step="0.01" value="1.0" class="slider" id="xSlider">
+    </div>
+    <div class="slidecontainer">
+        <input type="range" min="0" max="1" step="0.01" value="1.0" class="slider" id="ySlider">
+    </div>
+    <div class="slidecontainer">
+        <input type="range" min="0" max="1" step="0.01" value="1.0" class="slider" id="zSlider">
+    </div>
 </body>
 
 <script src="./gl-matrix.js"></script>

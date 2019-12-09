@@ -1,8 +1,12 @@
-var x = 1.0;
-var y = 1.0;
-var z = 1.0;
+var color = vec3.create();
+color.x = 1.0;
+color.y = 1.0;
+color.z = 1.0;
 
-var rot = 360;
+var rot = vec3.create();
+rot.x = 360;
+rot.y = 360;
+rot.z = 360;
 
 // Create shader program linking a vertex and fragment shader
 function initShaderProgram(gl, vertexSource, fragmentSource) {
@@ -179,11 +183,13 @@ function drawFrame(time) {
 
     const modelViewMatrix = mat4.create();
     mat4.translate(modelViewMatrix, modelViewMatrix, [0.0, 0.0, -6]);
-    mat4.rotate(modelViewMatrix, modelViewMatrix, rot * (Math.PI / 180), [0.0, 1.0, 0.0]);
+    mat4.rotate(modelViewMatrix, modelViewMatrix, rot.x * (Math.PI / 180), [1.0, 0.0, 0.0]);
+    mat4.rotate(modelViewMatrix, modelViewMatrix, rot.y * (Math.PI / 180), [0.0, 1.0, 0.0]);
+    mat4.rotate(modelViewMatrix, modelViewMatrix, rot.z * (Math.PI / 180), [0.0, 0.0, 1.0]);
 
     gl.useProgram(info.program);
 
-    gl.uniform3f(info.uniformLocations.color, x, y, z);
+    gl.uniform3f(info.uniformLocations.color, color.x, color.y, color.z);
     gl.uniformMatrix4fv(info.uniformLocations.modelView, false, modelViewMatrix);
 
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);

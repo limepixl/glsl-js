@@ -1,25 +1,37 @@
 var xSlider = document.getElementById("xSlider");
 xSlider.oninput = function() 
 {
-    x = this.value;
+    color.x = this.value;
 }
 
 var ySlider = document.getElementById("ySlider");
 ySlider.oninput = function() 
 {
-    y = this.value;
+    color.y = this.value;
 }
 
 var zSlider = document.getElementById("zSlider");
 zSlider.oninput = function() 
 {
-    z = this.value;
+    color.z = this.value;
 }
 
-var rotSlider = document.getElementById("rotSlider");
-rotSlider.oninput = function()
+var rotx = document.getElementById("rotx");
+rotx.oninput = function()
 {
-    rot = this.value;
+    rot.x = this.value;
+}
+
+var roty = document.getElementById("roty");
+roty.oninput = function()
+{
+    rot.y = this.value;
+}
+
+var rotz = document.getElementById("rotz");
+rotz.oninput = function()
+{
+    rot.z = this.value;
 }
 
 var polygonViewCheckbox = document.getElementById("polygons");

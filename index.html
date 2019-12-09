@@ -10,19 +10,32 @@
 <body>
     <canvas id="openGLCanvas" width="500" height="500"></canvas>
     <div class="slidecontainer">
-        R Value:    <input type="range" min="0" max="1" step="0.01" value="1.0" class="slider" id="xSlider">
+        <input autocomplete="off" type="range" min="0" max="1" step="0.01" value="1.0" class="slider" id="xSlider">
+        <label>Red</label>
     </div>
     <div class="slidecontainer">
-        G Value:    <input type="range" min="0" max="1" step="0.01" value="1.0" class="slider" id="ySlider">
+        <input autocomplete="off" type="range" min="0" max="1" step="0.01" value="1.0" class="slider" id="ySlider">
+        <label>Green</label>
     </div>
     <div class="slidecontainer">
-        B Value:    <input type="range" min="0" max="1" step="0.01" value="1.0" class="slider" id="zSlider">
+        <input autocomplete="off" type="range" min="0" max="1" step="0.01" value="1.0" class="slider" id="zSlider">
+        <label>Blue</label>
     </div>
     <div class="slidercontainer">
-        Rotation:   <input type="range" min="0" max="360" step="1" value="360" class="slider" id="rotSlider">
+        <input autocomplete="off" type="range" min="0" max="360" step="1" value="360" class="slider" id="rotx">
+        <label>X-axis Rotation</label>
+    </div>
+    <div class="slidercontainer">
+        <input autocomplete="off" type="range" min="0" max="360" step="1" value="360" class="slider" id="roty">
+        <label>Y-axis Rotation</label>
+    </div>
+    <div class="slidercontainer">
+        <input autocomplete="off" type="range" min="0" max="360" step="1" value="360" class="slider" id="rotz">
+        <label>Z-axis Rotation</label>
     </div>
     <div>
-        View polygons:  <input type="checkbox" id="polygons">
+        <label>View polygons</label>
+        <input autocomplete="off" type="checkbox" id="polygons">
     </div>
 </body>
 

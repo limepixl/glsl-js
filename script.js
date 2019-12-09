@@ -1,23 +1,8 @@
 var x = 1.0;
 var y = 1.0;
 var z = 1.0;
-var xSlider = document.getElementById("xSlider");
-xSlider.oninput = function() 
-{
-    x = this.value;
-}
 
-var ySlider = document.getElementById("ySlider");
-ySlider.oninput = function() 
-{
-    y = this.value;
-}
-
-var zSlider = document.getElementById("zSlider");
-zSlider.oninput = function() 
-{
-    z = this.value;
-}
+var rot = 360;
 
 // Create shader program linking a vertex and fragment shader
 function initShaderProgram(gl, vertexSource, fragmentSource) {
@@ -144,7 +129,7 @@ function drawFrame(time) {
 
     const modelViewMatrix = mat4.create();
     mat4.translate(modelViewMatrix, modelViewMatrix, [0.0, 0.0, -6]);
-    mat4.rotate(modelViewMatrix, modelViewMatrix, time, [0.0, 1.0, 0.0]);
+    mat4.rotate(modelViewMatrix, modelViewMatrix, rot * (Math.PI / 180), [0.0, 1.0, 0.0]);
 
     gl.useProgram(info.program);
 

@@ -89,13 +89,58 @@ function main() {
     }
 
     // Vertex data
-    const positions = 
-    [-1.0, -1.0,
-      1.0, -1.0,
-      1.0,  1.0,
-      1.0,  1.0,
-     -1.0,  1.0,
-     -1.0, -1.0,];
+    positions = [
+        // Front face
+        -1.0, -1.0,  1.0,
+         1.0, -1.0,  1.0,
+         1.0,  1.0,  1.0,
+        -1.0,  1.0,  1.0,
+        
+        // Back face
+        -1.0, -1.0, -1.0,
+        -1.0,  1.0, -1.0,
+         1.0,  1.0, -1.0,
+         1.0, -1.0, -1.0,
+        
+        // Top face
+        -1.0,  1.0, -1.0,
+        -1.0,  1.0,  1.0,
+         1.0,  1.0,  1.0,
+         1.0,  1.0, -1.0,
+        
+        // Bottom face
+        -1.0, -1.0, -1.0,
+         1.0, -1.0, -1.0,
+         1.0, -1.0,  1.0,
+        -1.0, -1.0,  1.0,
+        
+        // Right face
+         1.0, -1.0, -1.0,
+         1.0,  1.0, -1.0,
+         1.0,  1.0,  1.0,
+         1.0, -1.0,  1.0,
+        
+        // Left face
+        -1.0, -1.0, -1.0,
+        -1.0, -1.0,  1.0,
+        -1.0,  1.0,  1.0,
+        -1.0,  1.0, -1.0,
+    ];
+
+    indices = [
+        0, 1, 2,
+        2, 3, 0,
+        4, 5, 6,
+        6, 7, 4,
+        8, 9, 10,
+        10, 11, 8,
+        12, 13, 14,
+        14, 15, 12,
+        16, 17, 18,
+        18, 19, 16,
+        20, 21, 22,
+        22, 23, 20
+    ];
 
     const VAO = gl.createVertexArray();
     gl.bindVertexArray(VAO);
@@ -106,8 +151,13 @@ function main() {
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
 
     // Equivalent of glVertexAttribPointer 
-    gl.vertexAttribPointer(info.attribLocations.vertexPosition, 2, gl.FLOAT, false, 0, 0);
+    gl.vertexAttribPointer(info.attribLocations.vertexPosition, 3, gl.FLOAT, false, 0, 0);
     gl.enableVertexAttribArray(info.attribLocations.vertexPosition);
+
+    // Pass indices
+    const EBO = gl.createBuffer();
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, EBO);
+    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint32Array(indices), gl.STATIC_DRAW);
 
     const fieldOfView = 45 * Math.PI / 180;
     const projectionMatrix = mat4.create();
@@ -137,7 +187,10 @@ function drawFrame(time) {
     gl.uniformMatrix4fv(info.uniformLocations.modelView, false, modelViewMatrix);
 
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 6);
+    if(polygonViewCheckbox.checked)
+        gl.drawElements(gl.LINE_STRIP, indices.length, gl.UNSIGNED_INT, 0);
+    else
+        gl.drawElements(gl.TRIANGLE_STRIP, indices.length, gl.UNSIGNED_INT, 0);
 
     window.requestAnimationFrame(drawFrame)
 }

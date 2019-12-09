@@ -21,3 +21,5 @@ rotSlider.oninput = function()
 {
     rot = this.value;
 }
+
+var polygonViewCheckbox = document.getElementById("polygons");
